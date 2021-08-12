@@ -1,18 +1,22 @@
+import { useState } from "react";
 import styled from "styled-components";
 
 export const SearchInput = ({ searchByInput }) => {
-  const handleChange = (e) => {
-    const { value } = e.target;
-    searchByInput(value);
-  };
+  const [input, setInput] = useState("");
+
+  const handleKeyDown = (e) =>
+    e.key === "Enter" ? searchByInput(input) : null;
+
+  const handleClickOnIcon = () => searchByInput(input);
 
   return (
     <SearchInputStyled>
-      <label htmlFor="search">
+      <label htmlFor="search" onClick={handleClickOnIcon}>
         <i class="fas fa-search icon" />
       </label>
       <input
-        onChange={handleChange}
+        onKeyDown={handleKeyDown}
+        onChange={(e) => setInput(e.target.value)}
         placeholder="Search for a country..."
         type="search"
         id="search"

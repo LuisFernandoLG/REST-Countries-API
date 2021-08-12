@@ -1,4 +1,5 @@
 import { createGlobalStyle, css } from "styled-components";
+import { breakpointUp } from "../styleHelpers/ResponsiveStyle";
 
 const resetStyles = css`
   *,
@@ -30,5 +31,14 @@ body{
     font-family: 'Nunito Sans', sans-serif;
 
 
+}
+
+${
+  (breakpointUp("medium"),
+  `
+html{
+  font-size:15px;
+}
+`)
 }
 `;

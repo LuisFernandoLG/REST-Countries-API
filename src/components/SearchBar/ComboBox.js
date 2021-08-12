@@ -21,8 +21,8 @@ export const ComboBox = ({ filterByRegion }) => {
 
 const ComboBoxStyled = styled.div`
   background: ${({ theme: { secondaryColor } }) => secondaryColor};
-  flex-basis: min-content;
-  padding: 0 0.5rem;
+  /* flex-basis: ma; */
+  /* padding: 0 0.5rem; */
   cursor: pointer;
   margin-top: 0.5rem;
   padding: 0.5rem;
@@ -39,6 +39,7 @@ const ComboBoxStyled = styled.div`
       cursor: pointer;
       background: ${({ theme: { secondaryColor } }) => secondaryColor};
       color: ${({ theme: { tertiaryColor } }) => tertiaryColor};
+      padding: 0.5rem;
     }
 
     height: 100%;
