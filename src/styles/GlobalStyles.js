@@ -29,6 +29,8 @@ a{
 
 body{
     font-family: 'Nunito Sans', sans-serif;
+    max-width: 1920px;
+    margin: 0 auto;
 
 
 }
