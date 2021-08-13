@@ -29,6 +29,7 @@ export const SearchInput = ({ searchByInput }) => {
 const SearchInputStyled = styled.div`
   background: ${({ theme: { secondaryColor } }) => secondaryColor};
   color: ${({ theme: { tertiaryColor } }) => tertiaryColor};
+  box-shadow: 0 0 0.625rem ${({ theme: { boxShadowColor } }) => boxShadowColor};
 
   flex-basis: 35%;
 

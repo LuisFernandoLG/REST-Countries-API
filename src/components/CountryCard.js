@@ -13,7 +13,7 @@ export const CountryCard = ({
 }) => {
   return (
     <NavLink to={`${routes.COUNTRY_PAGE}/${code}`}>
-      <CountryCardStyled flex directionColumn>
+      <CountryCardStyled flex directionColumn gap="0.5rem">
         <div className="flag">
           <img src={flag} alt={name} />
         </div>
@@ -36,8 +36,8 @@ export const CountryCard = ({
 
 const CountryCardStyled = styled(Wrapper)`
   background: ${({ theme: { secondaryColor } }) => secondaryColor};
-  color: #fff;
   height: 100%;
+  box-shadow: 0 0 0.9375rem ${({ theme: { boxShadowColor } }) => boxShadowColor};
 
   .flag {
     flex-basis: 45%;

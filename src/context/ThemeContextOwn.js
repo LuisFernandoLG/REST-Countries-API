@@ -6,19 +6,19 @@ const initialThemes = {
   dark: {
     iconClasses: "fas fa-moon icon",
     name: "Dark Mode",
-    primaryColor: "hsl(207, 26%, 17%)", //(Dark Mode Background)
-    secondaryColor: "hsl(209, 23%, 22%)", //(Dark Mode Elements)
-    // veryDarkBlueText: "hsl(200, 15%, 8%)", //(Light Mode Text)
-    tertiaryColor: "hsl(0, 0%, 100%)", //(Dark Mode Text & Light Mode
+    primaryColor: "hsl(207, 26%, 17%)",
+    secondaryColor: "hsl(209, 23%, 22%)",
+    tertiaryColor: "hsl(0, 0%, 100%)",
+    boxShadowColor: "#27272702",
   },
 
   light: {
     iconClasses: "far fa-moon icon",
     name: "Light Mode",
-    primaryColor: "#EEEEEE", //(Light Mode Input)
-    secondaryColor: "hsl(0, 0%, 100%)", //(Light Mode Background)
-    // tertiaryColor: "hsl(0, 0%, 100%)", //(Dark Mode Text & Light Mode
-    tertiaryColor: "hsl(200, 15%, 8%)", //(Dark Mode Text & Light Mode
+    primaryColor: "#EEEEEE",
+    secondaryColor: "hsl(0, 0%, 100%)",
+    tertiaryColor: "hsl(200, 15%, 8%)",
+    boxShadowColor: "#2727270A",
   },
 };
 

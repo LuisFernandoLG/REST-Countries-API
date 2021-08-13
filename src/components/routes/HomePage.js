@@ -13,7 +13,7 @@ export const HomePage = () => {
 
   const filterByRegion = (region) => {
     const url = `https://restcountries.eu/rest/v2/region/${region}`;
-    if (region) fetchData(url);
+    if (region !== "") fetchData(url);
     else fetchData(getAllURL);
   };
 
@@ -23,7 +23,6 @@ export const HomePage = () => {
 
   const searchByInput = (input) => {
     const url = `https://restcountries.eu/rest/v2/name/${input}`;
-
     if (input.trim() === "") fetchData(getAllURL);
     else fetchData(url);
   };

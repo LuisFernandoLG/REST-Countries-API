@@ -16,7 +16,7 @@ export const CountryPage = () => {
   useEffect(() => {
     const url = `https://restcountries.eu/rest/v2/alpha/${code}`;
     fetchData(url);
-  }, []);
+  }, [code]);
 
   const itemFromArrayToString = (array) =>
     array.reduce((prev, { name }, i) => {
@@ -76,7 +76,9 @@ export const CountryPage = () => {
           <ul className="border-countries">
             <h3>Border contries:</h3>
             {data.borders.map((item) => (
-              <li>{item}</li>
+              <li key={item}>
+                <NavLink to={`${routes.COUNTRY_PAGE}/${item}`}>{item}</NavLink>
+              </li>
             ))}
           </ul>
         </CountryInformation>
@@ -122,7 +124,7 @@ const CountryInformation = styled.section`
     align-self: center;
 
     img {
-      object-fit: cover;
+      object-fit: scale-down;
       width: 100%;
       height: 100%;
     }
@@ -152,13 +154,11 @@ const CountryInformation = styled.section`
   }
 
   .main-details {
-    /* background: pink; */
     grid-column: 2 / span 1;
     grid-row: 2 / span 1;
   }
 
   .extra-details {
-    /* background: yellow; */
     grid-column: 3 / span 1;
     grid-row: 2 / span 1;
   }
@@ -167,7 +167,6 @@ const CountryInformation = styled.section`
     grid-column: 2 / -1;
     grid-row: 3 / -1;
 
-    /* background: red; */
     display: flex;
     flex-wrap: wrap;
     justify-content: flex-start;
@@ -186,6 +185,13 @@ const CountryInformation = styled.section`
       background: ${({ theme: { secondaryColor } }) => secondaryColor};
       padding: 0.5rem;
       text-align: center;
+      border-radius: 0.5rem;
+      box-shadow: 0.3125rem 0.3125rem 0.625rem
+        ${({ theme: { boxShadowColor } }) => boxShadowColor};
+
+      a {
+        color: ${({ theme: { tertiaryColor } }) => tertiaryColor};
+      }
     }
   }
 `;
@@ -198,14 +204,19 @@ const CountryPageStyled = styled.div`
 `;
 
 const BackBtn = styled(Wrapper)`
-  background: ${({ theme: { secondaryColor } }) => secondaryColor};
-  color: ${({ theme: { tertiaryColor } }) => tertiaryColor};
   width: max-content;
+
   padding: 1rem;
   margin: 2rem 0;
 
+  background: ${({ theme: { secondaryColor } }) => secondaryColor};
+  color: ${({ theme: { tertiaryColor } }) => tertiaryColor};
+  box-shadow: 0.3125rem 0.3125rem 0.625rem
+    ${({ theme: { boxShadowColor } }) => boxShadowColor};
+
   a {
     color: inherit;
+    font-size: 1rem;
     i {
       margin-right: 0.5rem;
     }

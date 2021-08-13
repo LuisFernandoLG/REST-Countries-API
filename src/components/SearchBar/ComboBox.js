@@ -3,13 +3,14 @@ import styled from "styled-components";
 export const ComboBox = ({ filterByRegion }) => {
   const handleChange = (e) => {
     const { value } = e.target;
-    if (value !== "false") filterByRegion(value);
+    console.log(value);
+    filterByRegion(value);
   };
 
   return (
     <ComboBoxStyled>
       <select onChange={handleChange}>
-        <option value="false">Filter by Region</option>
+        <option value="">Filter by Region</option>
         <option value="asia">Asia</option>
         <option value="europe">Europe</option>
         <option value="americas">Americas</option>
@@ -21,8 +22,8 @@ export const ComboBox = ({ filterByRegion }) => {
 
 const ComboBoxStyled = styled.div`
   background: ${({ theme: { secondaryColor } }) => secondaryColor};
-  /* flex-basis: ma; */
-  /* padding: 0 0.5rem; */
+  box-shadow: 0 0 0.625rem ${({ theme: { boxShadowColor } }) => boxShadowColor};
+
   cursor: pointer;
   margin-top: 0.5rem;
   padding: 0.5rem;
