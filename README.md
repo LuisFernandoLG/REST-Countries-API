@@ -6,15 +6,12 @@ This is a solution to the [REST Countries API with color theme switcher challeng
 
 - [Overview](#overview)
   - [The challenge](#the-challenge)
-  - [Screenshot](#screenshot)
+  - [Screenshot](#screenshots)
   - [Links](#links)
 - [My process](#my-process)
   - [Built with](#built-with)
-  - [What I learned](#what-i-learned)
   - [Useful resources](#useful-resources)
 - [Author](#author)
-
-**Note: Delete this note and update the table of contents based on what sections you keep.**
 
 ## Overview
 
@@ -29,12 +26,19 @@ Users should be able to:
 - Click through to the border countries on the detail page
 - Toggle the color scheme between light and dark mode _(optional)_
 
-### Screenshot
+## screenshots
 
-![](./screenshot.jpg)
-![](./screenshot2.jpg)
-![](./screenshot3.jpg)
-![](./screenshot4.jpg)
+### Home page dark theme
+![Home page dark theme](./screenshot.png)
+
+### Home page light theme
+![Home page light theme](./screenshot2.png)
+
+### Country page dark theme
+![Country page dark theme](./screenshot3.png)
+
+### Country page light theme
+![Country page light theme](./screenshot4.png)
 
 ### Links
 
