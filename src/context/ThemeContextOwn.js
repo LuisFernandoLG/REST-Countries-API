@@ -15,7 +15,7 @@ const initialThemes = {
   light: {
     iconClasses: "far fa-moon icon",
     name: "Light Mode",
-    primaryColor: "#EEEEEE",
+    primaryColor: "#fafafa",
     secondaryColor: "hsl(0, 0%, 100%)",
     tertiaryColor: "hsl(200, 15%, 8%)",
     boxShadowColor: "#2727270A",
