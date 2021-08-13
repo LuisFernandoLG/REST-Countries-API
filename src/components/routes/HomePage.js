@@ -1,66 +1,31 @@
-import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { useEffect } from "react";
 import styled from "styled-components";
+import { useFetch } from "../../hooks/useFetch";
 import { CountryCard } from "../CountryCard";
 import { Loader } from "../Loader";
+import { MessageError } from "../MessageError";
 import { SearchBar } from "../SearchBar/SearchBar";
 
+const getAllURL = "https://restcountries.eu/rest/v2/all";
+
 export const HomePage = () => {
-  const [countries, setCountries] = useState(null);
-  const [loading, setLoading] = useState(false);
+  const { fetchData, fetchErrors, loading, data } = useFetch();
 
   const filterByRegion = (region) => {
-    setLoading(true);
-    fetch(`https://restcountries.eu/rest/v2/region/${region}`)
-      .then((response) => {
-        return response.ok
-          ? response.json()
-          : new Promise.reject("Something went wrong");
-      })
-      .then((json) => {
-        setCountries(json);
-        setLoading(false);
-      });
+    const url = `https://restcountries.eu/rest/v2/region/${region}`;
+    if (region) fetchData(url);
+    else fetchData(getAllURL);
   };
 
   useEffect(() => {
-    setLoading(true);
-    fetch(
-      "https://restcountries.eu/rest/v2/all?fields=name;flag;population;region;capital;alpha2Code"
-    )
-      .then((response) => {
-        return response.ok
-          ? response.json()
-          : new Promise.reject("Something went wrong");
-      })
-      .then((json) => {
-        setCountries(json);
-        console.log(json);
-        setLoading(false);
-      });
+    fetchData(getAllURL);
   }, []);
 
   const searchByInput = (input) => {
-    setLoading(true);
-    const url =
-      input === ""
-        ? "https://restcountries.eu/rest/v2/all?fields=name;flag;population;region;capital;alpha2Code"
-        : `https://restcountries.eu/rest/v2/name/${input}`;
-    fetch(url)
-      .then((response) => {
-        return response.ok
-          ? response.json()
-          : new Promise.reject("Something went wrong");
-      })
-      .then((json) => {
-        setCountries(json);
-        console.log(json);
-        setLoading(false);
-      })
-      .catch((e) => {
-        console.log(e);
-        setCountries([]);
-      });
+    const url = `https://restcountries.eu/rest/v2/name/${input}`;
+
+    if (input.trim() === "") fetchData(getAllURL);
+    else fetchData(url);
   };
 
   return (
@@ -70,12 +35,16 @@ export const HomePage = () => {
         searchByInput={searchByInput}
       />
 
+      {!loading && fetchErrors && (
+        <MessageError message={fetchErrors.statusText} />
+      )}
+
       {loading ? (
         <Loader />
       ) : (
         <GridWrapper>
-          {countries
-            ? countries.map(
+          {data
+            ? data.map(
                 (
                   { name, flag, population, region, capital, alpha2Code },
                   index

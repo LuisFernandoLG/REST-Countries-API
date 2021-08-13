@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styled from "styled-components";
+import { breakpointUp } from "../../styleHelpers/ResponsiveStyle";
 
 export const SearchInput = ({ searchByInput }) => {
   const [input, setInput] = useState("");
@@ -12,7 +13,7 @@ export const SearchInput = ({ searchByInput }) => {
   return (
     <SearchInputStyled>
       <label htmlFor="search" onClick={handleClickOnIcon}>
-        <i class="fas fa-search icon" />
+        <i className="fas fa-search icon" />
       </label>
       <input
         onKeyDown={handleKeyDown}
@@ -31,6 +32,8 @@ const SearchInputStyled = styled.div`
 
   flex-basis: 35%;
 
+  ${breakpointUp("small", "flex-basis:100%;")}
+
   padding: 0.5rem 1rem;
 
   display: flex;
@@ -38,6 +41,7 @@ const SearchInputStyled = styled.div`
 
   .icon {
     padding-right: 1rem;
+    cursor: pointer;
   }
 
   input {

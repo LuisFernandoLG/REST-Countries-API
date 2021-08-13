@@ -1,4 +1,3 @@
-import PropTypes from "prop-types";
 import { NavLink } from "react-router-dom";
 import styled from "styled-components";
 import { routes } from "./routes/routes";
@@ -33,13 +32,6 @@ export const CountryCard = ({
       </CountryCardStyled>
     </NavLink>
   );
-};
-
-CountryCard.propTypes = {
-  flag: PropTypes.string,
-  name: PropTypes.string,
-  population: PropTypes.string,
-  capital: PropTypes.string,
 };
 
 const CountryCardStyled = styled(Wrapper)`

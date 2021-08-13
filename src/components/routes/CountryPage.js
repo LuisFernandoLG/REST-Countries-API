@@ -1,29 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import styled from "styled-components";
-import {
-  breakpointDown,
-  breakpointUp,
-} from "../../styleHelpers/ResponsiveStyle";
+import { useFetch } from "../../hooks/useFetch";
+import { breakpointUp } from "../../styleHelpers/ResponsiveStyle";
+import { Loader } from "../Loader";
+import { MessageError } from "../MessageError";
 import { Wrapper } from "../shareStyleComponents/Wrapper";
 import { routes } from "./routes";
 
 export const CountryPage = () => {
   let { code } = useParams();
 
-  const [country, setCountry] = useState(null);
+  const { loading, data, fetchData, fetchErrors } = useFetch();
 
   useEffect(() => {
-    fetch(`https://restcountries.eu/rest/v2/alpha/${code}`)
-      .then((response) => {
-        return response.ok
-          ? response.json()
-          : new Promise.reject("Something went wrong");
-      })
-      .then((json) => {
-        setCountry(json);
-        console.log(json);
-      });
+    const url = `https://restcountries.eu/rest/v2/alpha/${code}`;
+    fetchData(url);
   }, []);
 
   const itemFromArrayToString = (array) =>
@@ -36,49 +28,54 @@ export const CountryPage = () => {
     <CountryPageStyled>
       <BackBtn>
         <NavLink to={routes.HOME_PAGE}>
-          <i class="fas fa-long-arrow-alt-left"></i>
+          <i className="fas fa-long-arrow-alt-left"></i>
           <span>Back</span>
         </NavLink>
       </BackBtn>
 
-      {country !== null && (
+      {!loading && fetchErrors && (
+        <MessageError message={fetchErrors.statusText} />
+      )}
+
+      {loading && <Loader />}
+
+      {data && (
         <CountryInformation>
           <div className="flag">
-            <img src={country.flag} alt={country.name} />
+            <img src={data.flag} alt={data.name} />
           </div>
-          <h2>{country.name}</h2>
+          <h2>{data.name}</h2>
           <div className="main-details">
             <p>
-              Native name: <span>{country.nativeName}</span>
+              Native name: <span>{data.nativeName}</span>
             </p>
             <p>
-              Population: <span>{country.population}</span>
+              Population: <span>{data.population}</span>
             </p>
             <p>
-              Region: <span>{country.region}</span>
+              Region: <span>{data.region}</span>
             </p>
             <p>
-              Sub Region: <span>{country.subregion}</span>
+              Sub Region: <span>{data.subregion}</span>
             </p>
             <p>
-              Capital: <span>{country.capital}</span>
+              Capital: <span>{data.capital}</span>
             </p>
           </div>
           <div className="extra-details">
             <p>
-              Top Level Domain: <span>{country.topLevelDomain}</span>
+              Top Level Domain: <span>{data.topLevelDomain}</span>
             </p>
             <p>
-              Currencies:{" "}
-              <span>{itemFromArrayToString(country.currencies)}</span>
+              Currencies: <span>{itemFromArrayToString(data.currencies)}</span>
             </p>
             <p>
-              Languages: <span>{itemFromArrayToString(country.languages)}</span>
+              Languages: <span>{itemFromArrayToString(data.languages)}</span>
             </p>
           </div>
           <ul className="border-countries">
             <h3>Border contries:</h3>
-            {country.borders.map((item) => (
+            {data.borders.map((item) => (
               <li>{item}</li>
             ))}
           </ul>
@@ -89,12 +86,16 @@ export const CountryPage = () => {
 };
 
 const CountryInformation = styled.section`
+  height: auto;
+
   margin-top: 3rem;
+
   display: grid;
   grid-template-columns: 3fr 1fr 1fr;
   grid-template-rows: auto auto auto auto;
-  height: auto;
-  column-gap: 5rem;
+  column-gap: 3rem;
+  font-size: 1.3rem;
+
   color: ${({ theme: { tertiaryColor } }) => tertiaryColor};
 
   ${breakpointUp(
@@ -103,6 +104,7 @@ const CountryInformation = styled.section`
     display:flex;
     flex-direction:column;
     align-items:flex-start;
+    gap:2rem;
 
     .border-countries{
       h3{
@@ -116,8 +118,11 @@ const CountryInformation = styled.section`
   .flag {
     grid-column: 1 / 1;
     grid-row: 1 / -1;
+    justify-self: left;
+    align-self: center;
+
     img {
-      object-fit: scale-down;
+      object-fit: cover;
       width: 100%;
       height: 100%;
     }
@@ -127,6 +132,11 @@ const CountryInformation = styled.section`
   .extra-details {
     p {
       font-weight: 600;
+
+      &:not(:last-child) {
+        margin-bottom: 0.6rem;
+      }
+
       span {
         font-weight: 300;
       }
@@ -137,6 +147,8 @@ const CountryInformation = styled.section`
     grid-column: 2 / -1;
     grid-row: 1 / span 1;
     font-size: 2rem;
+
+    align-self: center;
   }
 
   .main-details {
@@ -166,6 +178,7 @@ const CountryInformation = styled.section`
     h3 {
       font-size: 1.2rem;
       text-align: left;
+      font-weight: 800;
     }
 
     li {
@@ -189,6 +202,7 @@ const BackBtn = styled(Wrapper)`
   color: ${({ theme: { tertiaryColor } }) => tertiaryColor};
   width: max-content;
   padding: 1rem;
+  margin: 2rem 0;
 
   a {
     color: inherit;

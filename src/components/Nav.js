@@ -20,5 +20,5 @@ const NavStyled = styled(Wrapper)`
   position: sticky;
   top: 0;
 
-  padding: 0 3rem;
+  padding: 1rem 3rem;
 `;

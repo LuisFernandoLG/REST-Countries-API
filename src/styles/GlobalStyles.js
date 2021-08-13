@@ -21,7 +21,7 @@ const resetStyles = css`
 `;
 
 export const GlobalStyles = createGlobalStyle`
-/* ${resetStyles} */
+  ${resetStyles}
 
 a{
   text-decoration: none;
@@ -33,12 +33,10 @@ body{
 
 }
 
-${
-  (breakpointUp("medium"),
-  `
-html{
-  font-size:15px;
-}
-`)
-}
+${breakpointUp(
+  "medium",
+  `html{
+  font-size:14px;}
+`
+)}
 `;
