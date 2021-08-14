@@ -39,7 +39,7 @@ export const CountryPage = () => {
 
       {loading && <Loader />}
 
-      {data && (
+      {!loading && data && (
         <CountryInformation>
           <div className="flag">
             <img src={data.flag} alt={data.name} />
@@ -75,11 +75,17 @@ export const CountryPage = () => {
           </div>
           <ul className="border-countries">
             <h3>Border contries:</h3>
-            {data.borders.map((item) => (
-              <li key={item}>
-                <NavLink to={`${routes.COUNTRY_PAGE}/${item}`}>{item}</NavLink>
-              </li>
-            ))}
+            {data.borders.length !== 0 ? (
+              data.borders.map((item) => (
+                <li key={item}>
+                  <NavLink to={`${routes.COUNTRY_PAGE}/${item}`}>
+                    {item}
+                  </NavLink>
+                </li>
+              ))
+            ) : (
+              <li className="none">None</li>
+            )}
           </ul>
         </CountryInformation>
       )}
@@ -93,15 +99,15 @@ const CountryInformation = styled.section`
   margin-top: 3rem;
 
   display: grid;
-  grid-template-columns: 3fr 1fr 1fr;
-  grid-template-rows: auto auto auto auto;
+  grid-template-columns: 2fr 1fr 1fr;
+  grid-template-rows: 10vh 30vh 15vh;
   column-gap: 3rem;
   font-size: 1.3rem;
 
   color: ${({ theme: { tertiaryColor } }) => tertiaryColor};
 
   ${breakpointUp(
-    "medium",
+    "large",
     `
     display:flex;
     flex-direction:column;
@@ -120,11 +126,10 @@ const CountryInformation = styled.section`
   .flag {
     grid-column: 1 / 1;
     grid-row: 1 / -1;
-    justify-self: left;
-    align-self: center;
+    /* height: 30vh; */
 
     img {
-      object-fit: scale-down;
+      object-fit: cover;
       width: 100%;
       height: 100%;
     }
@@ -136,7 +141,7 @@ const CountryInformation = styled.section`
       font-weight: 600;
 
       &:not(:last-child) {
-        margin-bottom: 0.6rem;
+        margin-bottom: 0.5rem;
       }
 
       span {
@@ -178,6 +183,8 @@ const CountryInformation = styled.section`
       font-size: 1.2rem;
       text-align: left;
       font-weight: 800;
+      padding: 0.5rem 0;
+      align-self: flex-start;
     }
 
     li {
@@ -189,9 +196,14 @@ const CountryInformation = styled.section`
       box-shadow: 0.3125rem 0.3125rem 0.625rem
         ${({ theme: { boxShadowColor } }) => boxShadowColor};
 
+      align-self: flex-start;
+
       a {
         color: ${({ theme: { tertiaryColor } }) => tertiaryColor};
       }
+    }
+    .none {
+      background: transparent;
     }
   }
 `;
