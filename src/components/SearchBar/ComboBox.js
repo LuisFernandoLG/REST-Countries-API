@@ -28,6 +28,9 @@ const ComboBoxStyled = styled.div`
   margin-top: 0.5rem;
   padding: 0.5rem;
 
+  border-radius: 0.5rem;
+  overflow: hidden;
+
   select {
     cursor: pointer;
     background: transparent;

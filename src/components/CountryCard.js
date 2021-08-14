@@ -35,9 +35,13 @@ export const CountryCard = ({
 };
 
 const CountryCardStyled = styled(Wrapper)`
-  background: ${({ theme: { secondaryColor } }) => secondaryColor};
   height: 100%;
+
+  background: ${({ theme: { secondaryColor } }) => secondaryColor};
   box-shadow: 0 0 0.9375rem ${({ theme: { boxShadowColor } }) => boxShadowColor};
+
+  border-radius: 0.5rem;
+  overflow: hidden;
 
   .flag {
     flex-basis: 45%;

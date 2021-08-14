@@ -31,6 +31,9 @@ const SearchInputStyled = styled.div`
   color: ${({ theme: { tertiaryColor } }) => tertiaryColor};
   box-shadow: 0 0 0.625rem ${({ theme: { boxShadowColor } }) => boxShadowColor};
 
+  border-radius: 0.5rem;
+  overflow: hidden;
+
   flex-basis: 35%;
 
   ${breakpointUp("small", "flex-basis:100%;")}
