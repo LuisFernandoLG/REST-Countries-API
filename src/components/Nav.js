@@ -1,20 +1,28 @@
+import { NavLink } from "react-router-dom";
 import styled from "styled-components";
+import { routes } from "./routes/routes";
 import { Wrapper } from "./shareStyleComponents/Wrapper";
 import { ThemeSwitcher } from "./ThemeSwitcher";
 
 export const Nav = () => {
   return (
     <NavStyled flex justifyContent="space-between" alignItems="center">
-      <Title href="/">Where in the world?</Title>
+      <Title>
+        <NavLink to={routes.HOME_PAGE}>Where in the world?</NavLink>
+      </Title>
       <ThemeSwitcher />
     </NavStyled>
   );
 };
 
-const Title = styled.a`
+const Title = styled.h1`
   color: ${({ theme: { tertiaryColor } }) => tertiaryColor};
   font-size: 1.2rem;
   font-weight: 800;
+
+  a {
+    color: inherit;
+  }
 `;
 
 const NavStyled = styled(Wrapper)`
