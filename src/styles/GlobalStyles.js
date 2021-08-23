@@ -15,6 +15,12 @@ const resetStyles = css`
     list-style: none;
   }
 
+  button {
+    border: none;
+    outline: none;
+    cursor: pointer;
+  }
+
   html {
     font-size: 16px;
   }
