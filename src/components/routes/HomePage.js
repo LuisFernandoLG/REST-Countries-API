@@ -4,6 +4,7 @@ import { useFetch } from "../../hooks/useFetch";
 import { CountryCard } from "../CountryCard";
 import { Loader } from "../Loader";
 import { MessageError } from "../MessageError";
+import { AutoPagination } from "../pagination/AutoPagination";
 import { SearchBar } from "../SearchBar/SearchBar";
 
 const getAllURL = "https://restcountries.eu/rest/v2/all";
@@ -27,6 +28,24 @@ export const HomePage = () => {
     else fetchData(url);
   };
 
+  const getCountriesRendered = () => {
+    const cardCountries = data.map(
+      ({ name, flag, population, region, capital, alpha2Code }, index) => (
+        <CountryCard
+          code={alpha2Code}
+          key={index}
+          name={name}
+          flag={flag}
+          population={population}
+          region={region}
+          capital={capital}
+        />
+      )
+    );
+
+    return cardCountries;
+  };
+
   return (
     <HomePageStyled>
       <SearchBar
@@ -42,24 +61,9 @@ export const HomePage = () => {
         <Loader />
       ) : (
         <GridWrapper>
-          {data
-            ? data.map(
-                (
-                  { name, flag, population, region, capital, alpha2Code },
-                  index
-                ) => (
-                  <CountryCard
-                    code={alpha2Code}
-                    key={index}
-                    name={name}
-                    flag={flag}
-                    population={population}
-                    region={region}
-                    capital={capital}
-                  />
-                )
-              )
-            : null}
+          {data ? (
+            <AutoPagination items={getCountriesRendered()} itemsPerPage={20} />
+          ) : null}
         </GridWrapper>
       )}
     </HomePageStyled>
