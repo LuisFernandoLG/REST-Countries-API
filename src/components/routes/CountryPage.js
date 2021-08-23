@@ -1,6 +1,7 @@
 import { useEffect } from "react";
 import { NavLink, useParams } from "react-router-dom";
 import styled from "styled-components";
+import { goTopPage } from "../../helpers/goTopPage";
 import { useFetch } from "../../hooks/useFetch";
 import { breakpointUp } from "../../styleHelpers/ResponsiveStyle";
 import { Loader } from "../Loader";
@@ -12,6 +13,10 @@ export const CountryPage = () => {
   let { code } = useParams();
 
   const { loading, data, fetchData, fetchErrors } = useFetch();
+
+  useEffect(() => {
+    goTopPage();
+  }, []);
 
   useEffect(() => {
     const url = `https://restcountries.eu/rest/v2/alpha/${code}`;
