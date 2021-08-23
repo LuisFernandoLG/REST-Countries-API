@@ -24,7 +24,7 @@ export const useFetch = () => {
       if (!response.ok) {
         let err = new Error("Error en la petición Fetch");
         err.status = response.status || "00";
-        err.statusText = response.statusText || "Ocurrió un error";
+        err.statusText = response.statusText || "Búsqueda sin resultados";
         throw err;
       }
 
